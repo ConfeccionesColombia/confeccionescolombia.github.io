@@ -42,7 +42,7 @@ const productos = [
     {
 	code: "lapiceras",
 	titulo: "Lapiceras",
-	precio: "$60.00",
+	precio: "$80.00",
 	colores: ["varios"],
 	fotos: [
 	    "img/categorias/lapiceras/001_resized.jpg",
