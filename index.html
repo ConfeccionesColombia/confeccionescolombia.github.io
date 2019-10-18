@@ -85,23 +85,26 @@
 	<div class="album py-5">
 	    <div class="container">
 
+	      <!-- ko foreach: splitted() -->
 	      <div class="row">
-		<div class="col">
-		  <div class="card-deck">
-		    <!-- ko foreach: items() -->
-		    <!-- ko template: { name: 'CategoriaIt' } --><!-- /ko -->
+		<div class="col">		  
+		  <div class="card-columns">
+		    <!-- ko foreach: $data -->
+		    <!-- ko template: { name: 'CategoriaIt' } --><!-- /ko -->		    
 		    <!-- /ko -->
-		  </div>
-		</div>
-	      </div>
+		  </div>		  
+		</div>	      
+	      </div>	      
+	      <!-- /ko -->
+	      
 	    </div>
 	</div>
 	    
     </script>
 
     <script type="text/html" id="CategoriaIt">
-      <div class="card">
-	<img data-bind="attr: { src: imgpath }" class="card-img-top">
+      <div class="card p-3">
+	<img data-bind="attr: { src: imgpath }" class="card-img-top img-fluid img-thumbnail">
 	<div class="card-body">
 	  <h5 class="card-title" data-bind="text: title"></h5>
 

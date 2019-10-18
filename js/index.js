@@ -1,9 +1,22 @@
 "use strict";
 
-class MainModel {
-    
+class MainModel {    
     constructor(items) {
-	this.items = ko.observableArray(items)
+	this.items = ko.observableArray(items);
+	this.splitted = ko.pureComputed(() => {
+	    let list = this.items();
+	    let split = [];
+	    for (let i = 0; i < list.length; i++) { 
+		if (i === 0 || i % 3 === 0) {
+		    split.push([]);
+		}
+		let arr = split[split.length -1];
+		arr.push(list[i]);
+	    }
+	    
+	    
+	    return split;
+	}, this);
     }
 }
 
