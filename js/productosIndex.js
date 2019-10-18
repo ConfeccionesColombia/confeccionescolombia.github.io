@@ -9,40 +9,16 @@ class MainModel {
 
 	this.splitted = ko.pureComputed(() => {
 	    let list = this.fotos();
-	    let split = [];
-	    for (let i = 0; i < list.length; i++) { 
-		if (i === 0 || i % 3 === 0) {
-		    split.push([]);
-		}
-		let arr = split[split.length -1];
-		arr.push(list[i]);
-	    }
-	    
-	    
-	    return split;
+	    return Services.split(list);	    
 	}, this);
-    }
-}
-
-class Binder {
-    bind(model, selector) {
-	let jqObj = $(selector);
-	if (jqObj.length === 0) {
-	    return;
-	}
-
-	let domObj = jqObj[0];
-	ko.cleanNode(domObj);
-	ko.applyBindings(model, domObj);
     }
 }
 
 
 $(function(){    
-    let binder = new Binder();
-    let searchParams = new URLSearchParams(window.location.search);
-    let product = ko.utils.arrayFirst(productos, p => p.code === searchParams.get('code'));
+    let sp = new URLSearchParams(window.location.search);
+    let item = ko.utils.arrayFirst(productos, p => p.code === sp.get('code'));
     
-    let main = new MainModel(product);
-    binder.bind(main, "main:first");
+    let main = new MainModel(item);
+    Services.bind(main, "main:first");
 });
