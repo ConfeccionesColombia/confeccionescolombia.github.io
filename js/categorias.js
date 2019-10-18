@@ -3,7 +3,7 @@
 const Categories = [
     {
 	code: "alforjas",
-	title: "Alfojrjas",
+	title: "Alforjas",
 	desc: "Alforjas para moto resistentes y durables. Variedad de colores en reflejantes.",
 	imgpath: "img/categorias/alforjas/003_resized.jpg"
     },
