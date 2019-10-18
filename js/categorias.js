@@ -4,13 +4,13 @@ const Categories = [
     {
 	code: "alforjas",
 	title: "Alfojrjas",
-	desc: "Alforjas pra moto resistentes y durables. Variedad de colores en reflejantes.",
+	desc: "Alforjas para moto resistentes y durables. Variedad de colores en reflejantes.",
 	imgpath: "img/categorias/alforjas/003_resized.jpg"
     },
     {
 	code: "mochilas",
 	title: "Mochilas",
-	desc: "Mochilas en telas lavables y coloers tierra.",
+	desc: "Mochilas en telas lavables y colores tierra.",
 	imgpath: "img/categorias/mochilas/004_resized.jpg"
     },
     {
