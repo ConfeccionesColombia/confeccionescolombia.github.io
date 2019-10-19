@@ -15,10 +15,15 @@ class MainModel {
 }
 
 
-$(function () {
-    let sp = new URLSearchParams(window.location.search);
-    let item = ko.utils.arrayFirst(productos, p => p.code === sp.get('code'));
 
-    let main = new MainModel(item);
-    Services.bind(main, "main:first");
+$(function () {
+    let url = 'data/productos.json';
+    let xhr = Services.getData(url, function () {
+        let productos = JSON.parse(this.responseText);
+        let sp = new URLSearchParams(window.location.search);
+        let item = ko.utils.arrayFirst(productos, p => p.code === sp.get('code'));
+
+        let main = new MainModel(item);
+        Services.bind(main, "main:first");
+    });
 });

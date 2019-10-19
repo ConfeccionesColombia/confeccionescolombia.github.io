@@ -23,5 +23,12 @@ let Services = {
         let domObj = jqObj[0];
         ko.cleanNode(domObj);
         ko.applyBindings(model, domObj);
+    },
+    getData: function (url, onLoad) {
+        var oReq = new XMLHttpRequest();
+        oReq.onload = onLoad;
+        oReq.open("get", url, true);
+        oReq.send();
+        return oReq;
     }
 }
