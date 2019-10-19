@@ -14,6 +14,16 @@ class ProductoModel {
             return Services.split(list);
         }, this);
     }
+
+    addFoto(product, event) {
+        const self = this;
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            product.fotos.push(e.target.result);
+        }
+        reader.readAsDataURL(file);
+    }
 }
 
 class IndexModel {

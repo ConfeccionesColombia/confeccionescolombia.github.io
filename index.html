@@ -75,7 +75,7 @@
             <div class="container">
                 <h1>Administración</h1>
                 
-                <!-- ko foreach: list() -->
+                <!-- ko foreach: { data: list, as: 'product' } -->
                 <div class="row" data-bind="css: { 'bg-light' : $index() % 2 === 0, 'bg-secondary'  : $index() % 2 !== 0 }">
                     <div class="col">	
                         <h2 data-bind="text: 'Producto: ' + ($index() + 1)"> </h2>	  
@@ -104,7 +104,7 @@
                             
                             <div>
                                 <a href="#">borrar</a>
-                                <a href="#">agregar</a>
+                                <a href="#">agregar</a>                                
                             </div>
                             
                             
@@ -116,21 +116,30 @@
                             <div class="col">		  
                                 <div class="card-columns">
                                 <!-- ko foreach: $data -->
-                                    <div class="card">
+                                    <div class="card p-3">
                                         <img data-bind="attr: { src: $data }" class="card-img-top" alt="foto">    
                                         <div class="card-footer">
                                             <a href="#">borrar</a>
-                                            <a href="#">reemplazar</a>
-                                            <a href="#">agregar</a>
-                                        </div>                                  
+                                            <input type="radio" data-bind="attr: { name: product.code() }" /> 
+                                        </div>                                                        
                                     </div>		    
                                 <!-- /ko -->
                                 </div>		  
                             </div>	      
                         </div>	      
-                        <!-- /ko -->                         
+                        <!-- /ko -->                                              
                     </div>
-                </div>	      
+                </div>
+                <div class="row" data-bind="css: { 'bg-light' : $index() % 2 === 0, 'bg-secondary'  : $index() % 2 !== 0 }">
+                    <div class="col">
+                        Agregar Foto: 
+                        <input type="file" name="foto" data-bind="event: { change: product.addFoto.bind(product) }" />
+                    </div>	      
+                    <div class="col">                            
+                        Cambiar Foto: 
+                        <input type="file" name="foto" data-bind="event: { change: product.addFoto.bind(product) }" />
+                    </div>	      
+                </div>
                 <!-- /ko -->                
             </div>
         </div>             
