@@ -77,8 +77,12 @@
                 
                 <!-- ko foreach: list() -->
                 <div class="row">
-                    <div class="col">		  
+                    <div class="col" data-bind="css: {'bg-light' : $index() % 2 === 0, 'bg-secondary'  : $index() % 2 !== 0}">		  
                         <form>
+                            <div class="form-group">
+                                <label for="code">Código</label>
+                                <input type="text" data-bind="value: code" class="form-control" id="code" aria-describedby="code" placeholder="Código" />
+                            </div>
                             <div class="form-group">
                                 <label for="title">Título</label>
                                 <input type="text" data-bind="value: titulo" class="form-control" id="title" aria-describedby="title" placeholder="Título" />
