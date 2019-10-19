@@ -77,7 +77,8 @@
                 
                 <!-- ko foreach: list() -->
                 <div class="row">
-                    <div class="col" data-bind="css: {'bg-light' : $index() % 2 === 0, 'bg-secondary'  : $index() % 2 !== 0}">		  
+                    <div class="col" data-bind="css: { 'bg-light' : $index() % 2 === 0, 'bg-secondary'  : $index() % 2 !== 0 }">	
+                        <h2 data-bind="text: 'Producto: ' + ($index() + 1)"> </h2>	  
                         <form>
                             <div class="form-group">
                                 <label for="code">Código</label>

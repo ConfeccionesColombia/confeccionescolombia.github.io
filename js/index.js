@@ -3,7 +3,7 @@
 class ProductoModel {
     constructor(it) {
         this.code = ko.observable(it.code);
-        this.titulo = ko.observable(it.title);
+        this.titulo = ko.observable(it.titulo);
         this.desc = ko.observable(it.desc);
         this.precio = ko.observable(it.precio);
         this.fotos = ko.observableArray(it.fotos);
