@@ -152,11 +152,14 @@
         <div class="card p-3">
             <img data-bind="attr: { src: $data }" class="card-img-top img-fluid img-thumbnail">
             <div class="card-body">
-                
+                <p>
+                    <span data-bind="text: $root.product().titulo"></span>
+                    <span data-bind="text: $root.product().precio"></span>
+                </p>
                 <div class="float-right">
-                <a href="#" data-bind="click: $root.removeProduct.bind($root)">
-                    <i class="fas fa-arrow-circle-left"></i> Regresar
-                </a>
+                    <a href="#" data-bind="click: $root.removeProduct.bind($root)">
+                        <i class="fas fa-arrow-circle-left"></i> Regresar
+                    </a>
                 </div>
         
             </div>
