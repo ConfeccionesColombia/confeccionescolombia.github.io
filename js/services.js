@@ -24,9 +24,12 @@ let Services = {
         ko.cleanNode(domObj);
         ko.applyBindings(model, domObj);
     },
-    getData: function (url, onLoad) {
+    getJson: function (url, callback) {
         var oReq = new XMLHttpRequest();
-        oReq.onload = onLoad;
+        oReq.onload = function () {
+            let data = JSON.parse(oReq.responseText);
+            callback(data);
+        };
         oReq.open("get", url, true);
         oReq.send();
         return oReq;

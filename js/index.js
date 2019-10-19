@@ -13,8 +13,7 @@ class MainModel {
 
 $(function () {
     let url = 'data/categorias.json';
-    let xhr = Services.getData(url, function () {
-        let categorias = JSON.parse(this.responseText);
+    let xhr = Services.getJson(url, function (categorias) {
         let main = new MainModel(categorias);
         Services.bind(main, "main:first");
     });
