@@ -53,7 +53,13 @@
     </header>
 
     <main role="main">
+        <!-- ko if: (product() === null || product() === undefined) -->
         <!-- ko template: { name: 'Categorias' } -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko ifnot: (product() === null || product() === undefined) -->
+        <!-- ko template: { name: 'Producto', data: product } -->
+        <!-- /ko -->
         <!-- /ko -->
     </main>
 
@@ -74,37 +80,87 @@
         </div>
     </footer>
 
+    <script type="text/html" id="Producto">
+        <section class="jumbotron text-center album">
+            <div class="container">
+                <h1 class="jumbotron-heading" data-bind="text: titulo"></h1>
+                <h2 data-bind="text: precio"></h2>
+
+                <p class="lead text-muted">
+                    Colores Disponibles: <span data-bind="text: colores()"> </span>
+                </p>
+
+                <p class="lead text-muted">
+                Compra por whats-app.
+                452 201 8336
+                <span style="color: Green;">
+                <i class="fab fa-whatsapp"></i>
+                </span>                   
+                </p>
+            </div>
+        </section>
+        <div class="album py-5">
+            <div class="container">    
+                <!-- ko foreach: sfotos() -->
+                <div class="row">
+                    <div class="col">		  
+                        <div class="card-columns">
+                        <!-- ko foreach: $data -->
+                        <!-- ko template: { name: 'FotoProducto' } --><!-- /ko -->		    
+                        <!-- /ko -->
+                        </div>		  
+                    </div>	      
+                </div>	      
+                <!-- /ko -->                
+            </div>
+        </div>                
+    </script>
+
     <script type="text/html" id="Categorias">
       	<section class="jumbotron text-center album">
-	    <div class="container">
-	      <h1 class="jumbotron-heading">Confecciones Colombia</h1>
-	      <p class="lead text-muted">
-		  Encuentra aquí bonitos productos listos para la venta
-		  en Uruapan y sus alrededores. Contáctanos por whats-app.
-		  452 201 8336
-		  <span style="color: Green;">
-		    <i class="fab fa-whatsapp"></i>
-		  </span>                   
-	      </p>
-	    </div>
-	</section>
-	
-	<div class="album py-5">
-	    <div class="container">
-	      <!-- ko foreach: splitted() -->
-	        <div class="row">
-                <div class="col">		  
-                    <div class="card-columns">
-                        <!-- ko foreach: $data -->
-                        <!-- ko template: { name: 'CategoriaIt' } --><!-- /ko -->		    
-                        <!-- /ko -->
-                    </div>		  
+            <div class="container">
+                <h1 class="jumbotron-heading">Confecciones Colombia</h1>
+                <p class="lead text-muted">
+                    Encuentra aquí bonitos productos listos para la venta
+                    en Uruapan y sus alrededores. Contáctanos por whats-app.
+                    452 201 8336
+                <span style="color: Green;">
+                    <i class="fab fa-whatsapp"></i>
+                </span>                   
+                </p>
+            </div>
+        </section>
+        
+        <div class="album py-5">
+            <div class="container">
+            <!-- ko foreach: scategorias() -->
+                <div class="row">
+                    <div class="col">		  
+                        <div class="card-columns">
+                            <!-- ko foreach: $data -->
+                            <!-- ko template: { name: 'CategoriaIt' } --><!-- /ko -->		    
+                            <!-- /ko -->
+                        </div>		  
+                    </div>	      
                 </div>	      
-            </div>	      
-            <!-- /ko -->            
-	    </div>
-	</div>
-	    
+                <!-- /ko -->            
+            </div>
+        </div>	    
+    </script>
+
+    <script type="text/html" id="FotoProducto">
+        <div class="card p-3">
+            <img data-bind="attr: { src: $data }" class="card-img-top img-fluid img-thumbnail">
+            <div class="card-body">
+                
+                <div class="float-right">
+                <a href="#" data-bind="click: $root.removeProduct.bind($root)">
+                    <i class="fas fa-arrow-circle-left"></i> Regresar
+                </a>
+                </div>
+        
+            </div>
+        </div>
     </script>
 
     <script type="text/html" id="CategoriaIt">
@@ -116,7 +172,7 @@
                 <p data-bind="text: desc"></p>
                 
                 <div class="float-right">
-                    <a data-bind="attr: { href: 'productos.html?code=' + code }"> <i class="far fa-eye"></i> ver mas </a>
+                    <a href="#" data-bind="click: $root.setProduct.bind($root)"> <i class="far fa-eye"></i> ver mas </a>
                 </div>
             </div>
       </div>
