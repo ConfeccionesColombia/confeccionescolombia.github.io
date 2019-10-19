@@ -1,17 +1,10 @@
 "use strict";
 
-class Category {
-    constructor(it) {
-        this.code = ko.observable(it.code);
-        this.title = ko.observable(it.title);
-        this.desc = ko.observable(it.desc);
-        this.imgpath = ko.observable(it.imgpath);
-    }
-}
-
 class ProductoModel {
     constructor(it) {
-        this.titulo = ko.observable(it.titulo);
+        this.code = ko.observable(it.code);
+        this.titulo = ko.observable(it.title);
+        this.desc = ko.observable(it.desc);
         this.precio = ko.observable(it.precio);
         this.fotos = ko.observableArray(it.fotos);
         this.colores = ko.observableArray(it.colores);
@@ -26,33 +19,27 @@ class ProductoModel {
 class IndexModel {
     constructor(isEditing) {
         this.isEditing = ko.observable(isEditing);
+        this.selected = ko.observable();
+        this.list = ko.observableArray([]);
 
-        this.product = ko.observable();
-
-        // data
-        this.productos = ko.observableArray([]);
-        this.categorias = ko.observableArray([]);
-
-        this.scategorias = ko.pureComputed(() => {
-            let list = this.categorias();
+        this.splitted = ko.pureComputed(() => {
+            let list = this.list();
             return Services.split(list);
         }, this);
 
     }
 
-    load(cats) {
-        let list = ko.utils.arrayMap(cats, it => new Category(it));
-        this.categorias(list);
+    load(prods) {
+        let list = ko.utils.arrayMap(prods, it => new ProductoModel(it));
+        this.list(list);
     }
 
-    setProduct(categoria) {
-        const self = this;
-        let prod = ko.utils.arrayFirst(self.productos(), p => p.code === categoria.code());
-        this.product(new ProductoModel(prod));
+    setProduct(prod) {
+        this.selected(prod);
     }
 
     removeProduct() {
-        this.product(null);
+        this.selected(null);
     }
 }
 
@@ -65,13 +52,8 @@ $(function () {
     let main = new IndexModel(isEditing);
     Services.bind(main, "main");
 
-    let catUrl = 'data/categorias.json';
-    Services.getJson(catUrl, function (cats) {
-        main.load(cats);
-    });
-
     let prodUrl = 'data/productos.json';
     Services.getJson(prodUrl, function (prods) {
-        main.productos(prods);
+        main.load(prods);
     });
 });

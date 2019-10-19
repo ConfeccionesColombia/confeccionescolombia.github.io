@@ -2,6 +2,7 @@
     {
         "code": "alforjas",
         "titulo": "Alforjas",
+        "desc": "Alforjas para moto resistentes y durables. Variedad de colores en reflejantes.",
         "precio": "$450.00",
         "colores": [
             "rojo",
@@ -20,6 +21,7 @@
     {
         "code": "mochilas",
         "titulo": "Mochilas",
+        "desc": "Mochilas en telas lavables y colores tierra.",
         "precio": "$950.00",
         "colores": [
             "vino-verde",
@@ -38,6 +40,7 @@
     {
         "code": "demano",
         "titulo": "Bolsas de Mano",
+        "desc": "Complementa tu vestuario con estos bonitos bolsos de mano.",
         "precio": "$450.00",
         "colores": [
             "varios"
@@ -52,6 +55,7 @@
     {
         "code": "lapiceras",
         "titulo": "Lapiceras",
+        "desc": "Prácticas para guardar todo tipo de cositas.",
         "precio": "$80.00",
         "colores": [
             "varios"

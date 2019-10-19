@@ -53,15 +53,60 @@
     </header>
 
     <main role="main">
-        <!-- ko if: (product() === null || product() === undefined) -->
-        <!-- ko template: { name: 'Categorias' } -->
+        <!-- ko if: isEditing() -->
+        <!-- ko template: { name: 'Editar' } -->
         <!-- /ko -->
         <!-- /ko -->
-        <!-- ko ifnot: (product() === null || product() === undefined) -->
-        <!-- ko template: { name: 'Producto', data: product } -->
+
+        <!-- ko if: isEditing() === false -->
+        <!-- ko if: (selected() === null || selected() === undefined) -->
+        <!-- ko template: { name: 'General' } -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko ifnot: (selected() === null || selected() === undefined) -->
+        <!-- ko template: { name: 'Detalle', data: selected } -->
+        <!-- /ko -->
         <!-- /ko -->
         <!-- /ko -->
     </main>
+
+    <script type="text/html" id="Editar">
+        <div class="album py-5">
+            <div class="container">
+                <h1>Administración</h1>
+                
+                <!-- ko foreach: list() -->
+                <div class="row">
+                    <div class="col">		  
+                        <form>
+                            <div class="form-group">
+                                <label for="title">Título</label>
+                                <input type="text" data-bind="value: titulo" class="form-control" id="title" aria-describedby="title" placeholder="Título" />
+                            </div>
+                            <div class="form-group">
+                                <label for="desc">Descripción</label>
+                                <textarea data-bind="value: desc" class="form-control" id="desc" aria-describedby="desc" placeholder="Descripción">
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="precio">Precio</label>
+                                <input type="text" data-bind="value: precio" class="form-control" id="precio" aria-describedby="precio" placeholder="Precio" />
+                            </div>
+                            <div class="form-group">
+                                <label for="colores">Colores (Separados por comas)</label>
+                                <input type="text" data-bind="value: colores" class="form-control" id="colores" aria-describedby="colores" placeholder="Colores (Separados por comas)" />
+                            </div>                                            
+                            
+                        </form>		  
+                    </div>
+                    <div class="col">
+                        Fotos La primera es la de la portada.
+                    </div>
+                </div>	      
+                <!-- /ko -->                
+            </div>
+        </div>             
+    </script>
 
     <footer class="ccnaranja">
         <div class="container">
@@ -80,7 +125,7 @@
         </div>
     </footer>
 
-    <script type="text/html" id="Producto">
+    <script type="text/html" id="Detalle">
         <section class="jumbotron text-center album">
             <div class="container">
                 <h1 class="jumbotron-heading" data-bind="text: titulo"></h1>
@@ -116,7 +161,7 @@
         </div>                
     </script>
 
-    <script type="text/html" id="Categorias">
+    <script type="text/html" id="General">
       	<section class="jumbotron text-center album">
             <div class="container">
                 <h1 class="jumbotron-heading">Confecciones Colombia</h1>
@@ -133,12 +178,12 @@
         
         <div class="album py-5">
             <div class="container">
-            <!-- ko foreach: scategorias() -->
+                <!-- ko foreach: splitted() -->
                 <div class="row">
                     <div class="col">		  
                         <div class="card-columns">
                             <!-- ko foreach: $data -->
-                            <!-- ko template: { name: 'CategoriaIt' } --><!-- /ko -->		    
+                            <!-- ko template: { name: 'Portadas' } --><!-- /ko -->		    
                             <!-- /ko -->
                         </div>		  
                     </div>	      
@@ -153,8 +198,8 @@
             <img data-bind="attr: { src: $data }" class="card-img-top img-fluid img-thumbnail">
             <div class="card-body">
                 <p>
-                    <span data-bind="text: $root.product().titulo"></span>
-                    <span data-bind="text: $root.product().precio"></span>
+                    <span data-bind="text: $root.selected().titulo"></span>
+                    <span data-bind="text: $root.selected().precio"></span>
                 </p>
                 <div class="float-right">
                     <a href="#" data-bind="click: $root.removeProduct.bind($root)">
@@ -166,11 +211,13 @@
         </div>
     </script>
 
-    <script type="text/html" id="CategoriaIt">
-        <div class="card p-3">             
-            <img data-bind="attr: { src: imgpath }" class="card-img-top img-fluid img-thumbnail">
+    <script type="text/html" id="Portadas">
+        <div class="card p-3">
+            <a href="#" data-bind="click: $root.setProduct.bind($root)">         
+                <img data-bind="attr: { src: fotos()[0] }" class="card-img-top img-fluid img-thumbnail">
+            </a>
             <div class="card-body">
-                <h5 class="card-title" data-bind="text: title"></h5>
+                <h5 class="card-title" data-bind="text: titulo"></h5>
 
                 <p data-bind="text: desc"></p>
                 
@@ -178,7 +225,7 @@
                     <a href="#" data-bind="click: $root.setProduct.bind($root)"> <i class="far fa-eye"></i> ver mas </a>
                 </div>
             </div>
-      </div>
+        </div>
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
