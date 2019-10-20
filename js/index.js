@@ -6,7 +6,7 @@ class ProductoModel {
         this.desc = ko.observable(it.desc);
         this.precio = ko.observable(it.precio);
         this.fotos = ko.observableArray(it.fotos);
-        this.colores = ko.observableArray(it.colores);
+        this.colores = ko.observable(it.colores.join());
 
         this.sfotos = ko.pureComputed(() => {
             let list = this.fotos();
@@ -18,24 +18,12 @@ class ProductoModel {
 
     mvLeft(foto) {
         const self = this;
-        let index = self.fotos.indexOf(foto);
-        if (index === 0) return;
-
-        let tmp = self.fotos()[index - 1];
-        self.fotos()[index - 1] = foto;
-        self.fotos()[index] = tmp;
-        self.fotos.valueHasMutated();
+        Services.moveUp(self.fotos, foto);
     }
 
     mvRight(foto) {
         const self = this;
-        let index = self.fotos.indexOf(foto);
-        if (self.fotos().length === (index + 1)) return;
-
-        let tmp = self.fotos()[index + 1];
-        self.fotos()[index + 1] = foto;
-        self.fotos()[index] = tmp;
-        self.fotos.valueHasMutated();
+        Services.moveDown(self.fotos, foto);
     }
 
     addFoto(product, event) {
@@ -43,9 +31,9 @@ class ProductoModel {
         var file = event.target.files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
-            Services.resizeImg(e.target.result, 800, 600, function(data) {
+            Services.resizeImg(e.target.result, 800, 600, function (data) {
                 product.fotos.push(data);
-            });            
+            });
         }
         reader.readAsDataURL(file);
     }
@@ -69,24 +57,24 @@ class IndexModel {
             return Services.split(list);
         }, self);
 
-        this.jsonFile = ko.pureComputed(()=>{
+        this.jsonFile = ko.pureComputed(() => {
             return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(self.getData()));
         }, self);
 
-        this.fileName = ko.computed(()=>{
+        this.fileName = ko.computed(() => {
             let now = new Date();
             return 'productos_' +
-            now.getFullYear() + "_" + 
-            (now.getMonth() + 1) + "_" + 
-            now.getDate() + "t" + 
-            now.getHours() + "_" + 
-            now.getMinutes() + "_" + 
-            now.getSeconds() + ".json";
-    
+                now.getFullYear() + "_" +
+                (now.getMonth() + 1) + "_" +
+                now.getDate() + "t" +
+                now.getHours() + "_" +
+                now.getMinutes() + "_" +
+                now.getSeconds() + ".json";
+
         }, self);
 
     }
-    
+
     loadConfig(item, event) {
         const self = this;
         var file = event.target.files[0];
@@ -125,50 +113,37 @@ class IndexModel {
             fotos: [],
             colores: []
         });
-        
+
         self.list.push(prod);
         prod.hasFocus(true);
     }
 
     mvUp(prod) {
         const self = this;
-        let index = self.list.indexOf(prod);
-        if (index === 0) return;
-
-        let tmp = self.list()[index - 1];
-        self.list()[index - 1] = prod;
-        self.list()[index] = tmp;
-        self.list.valueHasMutated();
+        Services.moveUp(self.list, prod);
     }
 
     mvDown(prod) {
         const self = this;
-        let index = self.list.indexOf(prod);
-        if (self.list().length === (index + 1)) return;
-
-        let tmp = self.list()[index + 1];
-        self.list()[index + 1] = prod;
-        self.list()[index] = tmp;
-        self.list.valueHasMutated();
+        Services.moveDown(self.list, prod);
     }
 
     getData() {
         const self = this;
         let list = [];
-        for(let it of self.list()) {
+        for (let it of self.list()) {
             list.push({
                 titulo: it.titulo(),
                 desc: it.desc(),
                 precio: it.precio(),
                 fotos: it.fotos(),
-                colores: it.colores()
+                colores: it.colores().split(',')
             });
         }
-        
+
         return list;
     }
 }
-
 
 $(function () {
 
