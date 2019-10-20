@@ -38,6 +38,8 @@ class ProductoModel {
         self.fotos.valueHasMutated();
     }
 
+    // TODO: Resize
+    // https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
     addFoto(product, event) {
         const self = this;
         var file = event.target.files[0];
