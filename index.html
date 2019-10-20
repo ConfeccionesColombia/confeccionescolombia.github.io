@@ -66,10 +66,10 @@
         <!-- ko template: { name: 'Detalle', data: selected } -->
         <!-- /ko -->
         <!-- /ko -->
-        
+
     </main>
 
-    <script type="text/html" id="Formulario">        
+    <script type="text/html" id="Formulario">
         <form>
             <div class="form-group">
                 <label for="title">Título</label>
@@ -98,34 +98,38 @@
     </script>
     <script type="text/html" id="FormularioFotos">
         <!-- ko foreach: sfotos() -->
-        <div class="row">
-            <div class="col">		  
-                <div class="card-columns">
+    <div class="row">
+        <div class="col">
+            <div class="card-columns">
                 <!-- ko foreach: $data -->
-                    <div class="card p-3 text-center">
-                        <span class="badge badge-light" data-bind="text: product.fotos.indexOf($data) === 0 ? 'Portada' : 'Foto ' + product.fotos.indexOf($data)"></span>
-                        
-                        <img data-bind="attr: { src: $data }" class="img-thumbnail" alt="foto">
-                        
-                        <a href="#" data-bind="if: product.fotos.indexOf($data) > 0, click: product.mvLeft.bind(product)" class="card-link">
-                            <i class="fas fa-arrow-left"></i>
-                        </a>
+                <div class="card p-3 text-center">
+                    <span class="badge badge-light"
+                        data-bind="text: product.fotos.indexOf($data) === 0 ? 'Portada' : 'Foto ' + product.fotos.indexOf($data)"></span>
 
-                        <a href="#" data-bind="click: product.delFoto.bind(product)" class="card-link">
-                            <span style="color: Red;">
-                                <i class="fas fa-trash"></i>
-                            </span>
-                        </a>
+                    <img data-bind="attr: { src: $data }" class="img-thumbnail" alt="foto">
 
-                        <a href="#" data-bind="if: product.fotos.indexOf($data) + 1 !== product.fotos().length, click: product.mvRight.bind(product)" class="card-link">
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>		    
+                    <a href="#" data-bind="if: product.fotos.indexOf($data) > 0, click: product.mvLeft.bind(product)"
+                        class="card-link">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+
+                    <a href="#" data-bind="click: product.delFoto.bind(product)" class="card-link">
+                        <span style="color: Red;">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                    </a>
+
+                    <a href="#"
+                        data-bind="if: product.fotos.indexOf($data) + 1 !== product.fotos().length, click: product.mvRight.bind(product)"
+                        class="card-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
                 <!-- /ko -->
-                </div>		  
-            </div>	      
-        </div>	      
-        <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
     </script>
     <script type="text/html" id="Editar">
         <div class="album py-5">

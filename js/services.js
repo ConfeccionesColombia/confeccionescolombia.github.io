@@ -38,7 +38,7 @@ let Services = {
         let ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
         return { width: srcWidth * ratio, height: srcHeight * ratio };
     },
-    resizeImg: function (src, maxwidth, maxheight, callback) {
+    resizeImg: function (fileType, src, maxwidth, maxheight, callback) {
         let canvas = $("<canvas />").attr("source", src).get()[0];
         var image = new Image();
         image.onload = function () {
@@ -52,7 +52,7 @@ let Services = {
             canvas.height = ratio.height;
             ctx.drawImage(image, 0, 0, ratio.width, ratio.height);
 
-            callback(canvas.toDataURL("image/jpeg"));
+            callback(canvas.toDataURL(fileType));
 
         }
         image.src = src;
