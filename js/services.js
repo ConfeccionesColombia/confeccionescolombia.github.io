@@ -38,22 +38,23 @@ let Services = {
         let ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);    
         return { width: srcWidth*ratio, height: srcHeight*ratio };        
     },
-    resizeImg: function(src, maxwidth, maxheight) {
+    resizeImg: function(src, maxwidth, maxheight, callback) {
         let canvas = $("<canvas />").attr("source", src).get()[0];
         var image = new Image();
+        image.onload = function(){
+
+            let ratio = Services.calcRatio(image.width, image.height, 
+                maxwidth, maxheight);
+            
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.width = ratio.width;
+            canvas.height = ratio.height;
+            ctx.drawImage(image, 0, 0, ratio.width, ratio.height);
+    
+            callback(canvas.toDataURL("image/jpeg"));
+    
+        }
         image.src = src;
-
-        let ratio = Services.calcRatio(image.width, image.height, 
-            maxwidth, maxheight);
-        
-        var ctx = canvas.getContext("2d");
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		canvas.width = ratio.width;
-		canvas.height = ratio.height;
-		ctx.drawImage(image, 0, 0, ratio.width, ratio.height);
-
-        return canvas.toDataURL("image/jpeg");
-
-
     }
 }

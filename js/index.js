@@ -43,8 +43,9 @@ class ProductoModel {
         var file = event.target.files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
-            let data = Services.resizeImg(e.target.result, 800, 600);
-            product.fotos.push(data);
+            Services.resizeImg(e.target.result, 800, 600, function(data) {
+                product.fotos.push(data);
+            });            
         }
         reader.readAsDataURL(file);
     }
