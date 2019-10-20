@@ -70,75 +70,88 @@
         <!-- /ko -->
     </main>
 
+    <script type="text/html" id="Formulario">        
+        <form>
+            <div class="form-group">
+                <label for="code">Código</label>
+                <input type="text" data-bind="value: code" class="form-control" id="code" aria-describedby="code" placeholder="Código" />
+            </div>
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" data-bind="value: titulo" class="form-control" id="title" aria-describedby="title" placeholder="Título" />
+            </div>
+            <div class="form-group">
+                <label for="desc">Descripción</label>
+                <textarea data-bind="value: desc" class="form-control" id="desc" aria-describedby="desc" placeholder="Descripción">
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="text" data-bind="value: precio" class="form-control" id="precio" aria-describedby="precio" placeholder="Precio" />
+            </div>
+            <div class="form-group">
+                <label for="colores">Colores (Separados por comas)</label>
+                <input type="text" data-bind="value: colores" class="form-control" id="colores" aria-describedby="colores" placeholder="Colores (Separados por comas)" />
+            </div>                                            
+            
+            <div class="text-right">
+                <button type="button" class="btn btn-danger">Borrar <i class="far fa-trash-alt"></i></button>                                
+            </div>
+            
+            
+        </form>
+    </script>
+    <script type="text/html" id="FormularioFotos">
+        <!-- ko foreach: sfotos() -->
+        <div class="row">
+            <div class="col">		  
+                <div class="card-columns">
+                <!-- ko foreach: $data -->
+                    <div class="card p-3 text-right">
+                        <img data-bind="attr: { src: $data }" class="img-thumbnail" alt="foto">
+                        <a href="#" class="card-link">
+                            <span style="color: Red;">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </a>
+                    </div>		    
+                <!-- /ko -->
+                </div>		  
+            </div>	      
+        </div>	      
+        <!-- /ko -->
+    </script>
     <script type="text/html" id="Editar">
         <div class="album py-5">
             <div class="container">
                 <h1>Administración</h1>
                 
                 <!-- ko foreach: { data: list, as: 'product' } -->
-                <div class="row" data-bind="css: { 'bg-light' : $index() % 2 === 0, 'bg-secondary'  : $index() % 2 !== 0 }">
+                <div class="row mt-4" data-bind="css: { 'bg-light' : $index() % 2 === 0 }">
+                    <div class="col text-center">	
+                        <h2 class="my-4" data-bind="text: titulo"></h2>                                             
+                    </div>
+                </div>                
+                <div class="row" data-bind="css: { 'bg-light' : $index() % 2 === 0 }">
                     <div class="col">	
-                        <h2 data-bind="text: 'Producto: ' + ($index() + 1)"> </h2>	  
-                        <form>
-                            <div class="form-group">
-                                <label for="code">Código</label>
-                                <input type="text" data-bind="value: code" class="form-control" id="code" aria-describedby="code" placeholder="Código" />
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Título</label>
-                                <input type="text" data-bind="value: titulo" class="form-control" id="title" aria-describedby="title" placeholder="Título" />
-                            </div>
-                            <div class="form-group">
-                                <label for="desc">Descripción</label>
-                                <textarea data-bind="value: desc" class="form-control" id="desc" aria-describedby="desc" placeholder="Descripción">
-                                </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="precio">Precio</label>
-                                <input type="text" data-bind="value: precio" class="form-control" id="precio" aria-describedby="precio" placeholder="Precio" />
-                            </div>
-                            <div class="form-group">
-                                <label for="colores">Colores (Separados por comas)</label>
-                                <input type="text" data-bind="value: colores" class="form-control" id="colores" aria-describedby="colores" placeholder="Colores (Separados por comas)" />
-                            </div>                                            
-                            
-                            <div>
-                                <a href="#">borrar</a>
-                                <a href="#">agregar</a>                                
-                            </div>
-                            
-                            
-                        </form>		  
+                        <!-- ko template: { name: 'Formulario' } --><!-- /ko -->
                     </div>
                     <div class="col">                        
-                        <!-- ko foreach: sfotos() -->
-                        <div class="row">
-                            <div class="col">		  
-                                <div class="card-columns">
-                                <!-- ko foreach: $data -->
-                                    <div class="card p-3">
-                                        <img data-bind="attr: { src: $data }" class="card-img-top" alt="foto">    
-                                        <div class="card-footer">
-                                            <a href="#">borrar</a>
-                                            <input type="radio" data-bind="attr: { name: product.code() }" /> 
-                                        </div>                                                        
-                                    </div>		    
-                                <!-- /ko -->
-                                </div>		  
-                            </div>	      
-                        </div>	      
-                        <!-- /ko -->                                              
+                        <!-- ko template: { name: 'FormularioFotos' } --><!-- /ko -->                                              
                     </div>
                 </div>
-                <div class="row" data-bind="css: { 'bg-light' : $index() % 2 === 0, 'bg-secondary'  : $index() % 2 !== 0 }">
+                <div class="row" data-bind="css: { 'bg-light' : $index() % 2 === 0 }">
                     <div class="col">
-                        Agregar Foto: 
-                        <input type="file" name="foto" data-bind="event: { change: product.addFoto.bind(product) }" />
+                        
                     </div>	      
                     <div class="col">                            
-                        Cambiar Foto: 
-                        <input type="file" name="foto" data-bind="event: { change: product.addFoto.bind(product) }" />
-                    </div>	      
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFileLang" 
+                            data-bind="event: { change: product.addFoto.bind(product) }"
+                            lang="es">
+                            <label class="custom-file-label" for="customFileLang">Agregar foto</label>
+                        </div>
+                    </div>   
                 </div>
                 <!-- /ko -->                
             </div>
