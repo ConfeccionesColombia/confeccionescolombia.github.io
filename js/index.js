@@ -71,6 +71,18 @@ class IndexModel {
             return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(self.getData()));
         }, self);
 
+        this.fileName = ko.computed(()=>{
+            let now = new Date();
+            return 'productos_' +
+            now.getFullYear() + "_" + 
+            (now.getMonth() + 1) + "_" + 
+            now.getDate() + "t" + 
+            now.getHours() + "_" + 
+            now.getMinutes() + "_" + 
+            now.getSeconds() + ".json";
+    
+        }, self);
+
     }
 
     load(prods) {
