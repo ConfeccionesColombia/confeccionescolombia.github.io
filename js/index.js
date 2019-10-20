@@ -12,6 +12,8 @@ class ProductoModel {
             let list = this.fotos();
             return Services.split(list);
         }, this);
+
+        this.hasFocus = ko.observable(false);
     }
 
     mvLeft(foto) {
@@ -91,13 +93,16 @@ class IndexModel {
 
     newProd() {
         const self = this;
-        self.list.push(new ProductoModel({
+        let prod = new ProductoModel({
             titulo: '',
             desc: '',
             precio: '',
             fotos: [],
             colores: []
-        }));
+        });
+        
+        self.list.push(prod);
+        prod.hasFocus(true);
     }
 
     mvUp(prod) {

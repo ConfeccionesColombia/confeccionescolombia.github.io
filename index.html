@@ -58,7 +58,6 @@
         <!-- /ko -->
         <!-- /ko -->
 
-        <!-- ko if: isEditing() === false -->
         <!-- ko if: (selected() === null || selected() === undefined) -->
         <!-- ko template: { name: 'General' } -->
         <!-- /ko -->
@@ -67,7 +66,7 @@
         <!-- ko template: { name: 'Detalle', data: selected } -->
         <!-- /ko -->
         <!-- /ko -->
-        <!-- /ko -->
+        
     </main>
 
     <script type="text/html" id="Formulario">        
@@ -91,7 +90,7 @@
             </div>                                            
             
             <div class="text-right">
-                <button data-bind="click: $parent.delProd.bind($parent)" type="button" class="btn btn-danger">Borrar Anuncio <i class="far fa-trash-alt"></i></button>                                
+                <button data-bind="hasFocus: hasFocus, click: $parent.delProd.bind($parent)" type="button" class="btn btn-danger">Borrar Anuncio <i class="far fa-trash-alt"></i></button>                                
             </div>
             
             
@@ -136,13 +135,13 @@
                     <div class="col">
                         <a href="index.html" class="btn btn-secondary btn-lg">
                             Salir <i class="fas fa-door-open"></i>
-                        </a>                 
+                        </a> 
                     
                         <a data-bind="attr: { href: jsonFile, download: 'alv.json' }" class="btn btn-info btn-lg mx-4">
-                            Bajar Archivo <i class="fas fa-cloud-download-alt"></i>
+                            Guardar Cambios <i class="fas fa-cloud-download-alt"></i>
                         </a>
                     
-                        <button type="button" class="btn btn-success btn-lg">
+                        <button type="button" data-bind="click: newProd" class="btn btn-success btn-lg">
                             Nuevo Anuncio <i class="fas fa-plus"></i>
                         </button>
                     </div>
