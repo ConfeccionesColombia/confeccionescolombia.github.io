@@ -59,10 +59,16 @@ class IndexModel {
         this.selected = ko.observable();
         this.list = ko.observableArray([]);
 
+        const self = this;
+
         this.splitted = ko.pureComputed(() => {
-            let list = this.list();
+            let list = self.list();
             return Services.split(list);
-        }, this);
+        }, self);
+
+        this.jsonFile = ko.pureComputed(()=>{
+            return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(self.getData()));
+        }, self);
 
     }
 
@@ -82,6 +88,18 @@ class IndexModel {
     delProd(prod) {
         const self = this;
         self.list.remove(prod);
+    }
+
+    newProd() {
+        const self = this;
+        self.list.push(new ProductoModel({
+            code: '',
+            titulo: '',
+            desc: '',
+            precio: '',
+            fotos: [],
+            colores: []
+        }));
     }
 
     mvUp(prod) {
@@ -104,6 +122,23 @@ class IndexModel {
         self.list()[index + 1] = prod;
         self.list()[index] = tmp;
         self.list.valueHasMutated();
+    }
+
+    getData() {
+        const self = this;
+        let list = [];
+        for(let it of self.list()) {
+            list.push({
+                code: it.code(),
+                titulo: it.titulo(),
+                desc: it.desc(),
+                precio: it.precio(),
+                fotos: it.fotos(),
+                colores: it.colores()
+            });
+        }
+        
+        return list;
     }
 }
 

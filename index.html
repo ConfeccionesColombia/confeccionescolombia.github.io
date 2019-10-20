@@ -177,17 +177,17 @@
                 <!-- /ko -->
                 <div class="row mt-4 text-center">
                     <div class="col">
-                        <button type="button" class="btn btn-secondary btn-lg">
+                        <a href="index.html" class="btn btn-secondary btn-lg">
                             Salir <i class="fas fa-door-open"></i>
-                        </button>                 
+                        </a>                 
                     </div>   
                     <div class="col">
-                        <button type="button" class="btn btn-info btn-lg">
+                        <a data-bind="attr: { href: jsonFile, download: 'alv.json' }" class="btn btn-info btn-lg">
                             Bajar Archivo <i class="fas fa-cloud-download-alt"></i>
-                        </button>
+                        </a>
                     </div>
                     <div class="col">                        
-                        <button type="button" class="btn btn-success btn-lg">
+                        <button data-bind="click: $data.newProd.bind($data)" type="button" class="btn btn-success btn-lg">
                             Nuevo Anuncio <i class="fas fa-plus"></i>
                         </button>
                     </div>
