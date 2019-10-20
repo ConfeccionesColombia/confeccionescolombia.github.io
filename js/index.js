@@ -15,6 +15,28 @@ class ProductoModel {
         }, this);
     }
 
+    mvLeft(foto) {
+        const self = this;
+        let index = self.fotos.indexOf(foto);
+        if (index === 0) return;
+
+        let tmp = self.fotos()[index - 1];
+        self.fotos()[index - 1] = foto;
+        self.fotos()[index] = tmp;
+        self.fotos.valueHasMutated();
+    }
+
+    mvRight(foto) {
+        const self = this;
+        let index = self.fotos.indexOf(foto);
+        if (self.fotos().length === (index + 1)) return;
+
+        let tmp = self.fotos()[index + 1];
+        self.fotos()[index + 1] = foto;
+        self.fotos()[index] = tmp;
+        self.fotos.valueHasMutated();
+    }
+
     addFoto(product, event) {
         const self = this;
         var file = event.target.files[0];
@@ -23,6 +45,11 @@ class ProductoModel {
             product.fotos.push(e.target.result);
         }
         reader.readAsDataURL(file);
+    }
+
+    delFoto(foto) {
+        const self = this;
+        self.fotos.remove(foto);
     }
 }
 
@@ -50,6 +77,33 @@ class IndexModel {
 
     removeProduct() {
         this.selected(null);
+    }
+
+    delProd(prod) {
+        const self = this;
+        self.list.remove(prod);
+    }
+
+    mvUp(prod) {
+        const self = this;
+        let index = self.list.indexOf(prod);
+        if (index === 0) return;
+
+        let tmp = self.list()[index - 1];
+        self.list()[index - 1] = prod;
+        self.list()[index] = tmp;
+        self.list.valueHasMutated();
+    }
+
+    mvDown(prod) {
+        const self = this;
+        let index = self.list.indexOf(prod);
+        if (self.list().length === (index + 1)) return;
+
+        let tmp = self.list()[index + 1];
+        self.list()[index + 1] = prod;
+        self.list()[index] = tmp;
+        self.list.valueHasMutated();
     }
 }
 

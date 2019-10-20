@@ -95,7 +95,7 @@
             </div>                                            
             
             <div class="text-right">
-                <button type="button" class="btn btn-danger">Borrar Anuncio <i class="far fa-trash-alt"></i></button>                                
+                <button data-bind="click: $parent.delProd.bind($parent)" type="button" class="btn btn-danger">Borrar Anuncio <i class="far fa-trash-alt"></i></button>                                
             </div>
             
             
@@ -111,17 +111,18 @@
                         <span class="badge badge-light" data-bind="text: product.fotos.indexOf($data) === 0 ? 'Portada' : 'Foto ' + product.fotos.indexOf($data)"></span>
                         
                         <img data-bind="attr: { src: $data }" class="img-thumbnail" alt="foto">
-                        <a href="#" class="card-link">
+                        
+                        <a href="#" data-bind="if: product.fotos.indexOf($data) > 0, click: product.mvLeft.bind(product)" class="card-link">
                             <i class="fas fa-arrow-left"></i>
                         </a>
 
-                        <a href="#" class="card-link">
+                        <a href="#" data-bind="click: product.delFoto.bind(product)" class="card-link">
                             <span style="color: Red;">
                                 <i class="fas fa-trash"></i>
                             </span>
                         </a>
 
-                        <a href="#" class="card-link">
+                        <a href="#" data-bind="if: product.fotos.indexOf($data) + 1 !== product.fotos().length, click: product.mvRight.bind(product)" class="card-link">
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>		    
@@ -141,12 +142,12 @@
                     <div class="col text-center">	
                         <h2 class="my-4" data-bind="text: titulo"></h2>                                             
                         <div class="text-left">    
-                            <span class="text-muted">Ajustar orden</span>                    
-                            <a href="#" class="ml-4">
+                            <span class="text-muted">Mover</span>
+                            <a data-bind="if: $index() > 0, click: $parent.mvUp.bind($parent)" href="#" class="ml-4">
                                 <i class="fas fa-arrow-up"></i>
                             </a>
-
-                            <a href="#" class="ml-4">
+                            
+                            <a data-bind="if: $index() + 1 !== $parent.list().length, click: $parent.mvDown.bind($parent)" href="#" class="ml-4">
                                 <i class="fas fa-arrow-down"></i>
                             </a>
                         </div>
