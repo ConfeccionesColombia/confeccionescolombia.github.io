@@ -132,6 +132,21 @@
         <div class="album py-5">
             <div class="container">
                 <h1>Administración</h1>
+                <div class="row text-center fixed-top">
+                    <div class="col">
+                        <a href="index.html" class="btn btn-secondary btn-lg">
+                            Salir <i class="fas fa-door-open"></i>
+                        </a>                 
+                    
+                        <a data-bind="attr: { href: jsonFile, download: 'alv.json' }" class="btn btn-info btn-lg mx-4">
+                            Bajar Archivo <i class="fas fa-cloud-download-alt"></i>
+                        </a>
+                    
+                        <button type="button" class="btn btn-success btn-lg">
+                            Nuevo Anuncio <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
                 
                 <!-- ko foreach: { data: list, as: 'product' } -->
                 <div class="row mt-4" data-bind="css: { 'bg-light' : $index() % 2 === 0 }">                   
@@ -170,24 +185,7 @@
                         </div>
                     </div>   
                 </div>
-                <!-- /ko -->
-                <div class="row mt-4 text-center">
-                    <div class="col">
-                        <a href="index.html" class="btn btn-secondary btn-lg">
-                            Salir <i class="fas fa-door-open"></i>
-                        </a>                 
-                    </div>   
-                    <div class="col">
-                        <a data-bind="attr: { href: jsonFile, download: 'alv.json' }" class="btn btn-info btn-lg">
-                            Bajar Archivo <i class="fas fa-cloud-download-alt"></i>
-                        </a>
-                    </div>
-                    <div class="col">                        
-                        <button data-bind="click: $data.newProd.bind($data)" type="button" class="btn btn-success btn-lg">
-                            Nuevo Anuncio <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                </div>           
+                <!-- /ko -->                           
             </div>
         </div>             
     </script>
