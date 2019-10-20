@@ -84,6 +84,17 @@ class IndexModel {
         }, self);
 
     }
+    
+    loadConfig(item, event) {
+        const self = this;
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            let data = JSON.parse(e.target.result);
+            self.load(data);
+        }
+        reader.readAsText(file);
+    }
 
     load(prods) {
         let list = ko.utils.arrayMap(prods, it => new ProductoModel(it));

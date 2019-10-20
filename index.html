@@ -146,6 +146,17 @@
                         </button>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col">                     
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="upload" 
+                            data-bind="event: { change: loadConfig }"
+                            lang="es">
+                            <label class="custom-file-label" for="upload">Abrir archivo guardado</label>
+                        </div>
+                    </div>   
+                </div>
                 
                 <!-- ko foreach: { data: list, as: 'product' } -->
                 <div class="row mt-4" data-bind="css: { 'bg-light' : $index() % 2 === 0 }">                   
