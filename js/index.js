@@ -2,7 +2,6 @@
 
 class ProductoModel {
     constructor(it) {
-        this.code = ko.observable(it.code);
         this.titulo = ko.observable(it.titulo);
         this.desc = ko.observable(it.desc);
         this.precio = ko.observable(it.precio);
@@ -93,7 +92,6 @@ class IndexModel {
     newProd() {
         const self = this;
         self.list.push(new ProductoModel({
-            code: '',
             titulo: '',
             desc: '',
             precio: '',
@@ -129,7 +127,6 @@ class IndexModel {
         let list = [];
         for(let it of self.list()) {
             list.push({
-                code: it.code(),
                 titulo: it.titulo(),
                 desc: it.desc(),
                 precio: it.precio(),
