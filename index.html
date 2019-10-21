@@ -163,8 +163,7 @@
                     </div>
                 </div>
                 <div class="row" data-bind="css: { 'bg-light' : $index() % 2 === 0 }">
-                    <div class="col text-left">
-                        <span class="text-muted">Mover</span>
+                    <div class="col text-left">                        
                         <a data-bind="if: $index() > 0, click: $parent.mvUp.bind($parent)" href="#" class="ml-4">
                             <i class="fas fa-arrow-up"></i>
                         </a>
@@ -172,6 +171,8 @@
                         <a data-bind="if: $index() + 1 !== $parent.list().length, click: $parent.mvDown.bind($parent)" href="#" class="ml-4">
                             <i class="fas fa-arrow-down"></i>
                         </a>
+
+                        <span class="text-muted ml-4">Mover</span>
                     </div>
                     <div class="col text-right">
                         <button data-bind="click: $parent.delProd.bind($parent)" type="button" class="btn btn-danger">Borrar Anuncio <i class="far fa-trash-alt"></i></button>
