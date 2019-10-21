@@ -28,14 +28,15 @@ class ProductoModel {
 
     addFoto(product, event) {
         const self = this;
-        var file = event.target.files[0];
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            Services.resizeImg(file.type, e.target.result, 800, 600, function (data) {
-                product.fotos.push(data);
-            });
+        for (let file of event.target.files) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                Services.resizeImg(file.type, e.target.result, 800, 600, function (data) {
+                    product.fotos.push(data);
+                });
+            }
+            reader.readAsDataURL(file);
         }
-        reader.readAsDataURL(file);
     }
 
     delFoto(foto) {
