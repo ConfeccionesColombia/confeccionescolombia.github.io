@@ -6,7 +6,7 @@ class ProductoModel {
         this.desc = ko.observable(it.desc);
         this.precio = ko.observable(it.precio);
         this.fotos = ko.observableArray(it.fotos);
-        this.colores = ko.observable(it.colores.join());
+        this.colores = ko.observable(it.colores);
 
         this.sfotos = ko.pureComputed(() => {
             let list = this.fotos();
@@ -111,7 +111,7 @@ class IndexModel {
             desc: '',
             precio: '',
             fotos: [],
-            colores: []
+            colores: ''
         });
 
         self.list.push(prod);
@@ -137,7 +137,7 @@ class IndexModel {
                 desc: it.desc(),
                 precio: it.precio(),
                 fotos: it.fotos(),
-                colores: it.colores().split(',')
+                colores: it.colores()
             });
         }
 
