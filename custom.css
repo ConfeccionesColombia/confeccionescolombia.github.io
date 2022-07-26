@@ -1,0 +1,4 @@
+div.snipcart-cart__footer footer,
+div.snipcart-cart__featured-payment-methods-container {
+    display: none;
+}
