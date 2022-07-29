@@ -85,12 +85,24 @@ $(window).on('load', function () {
       let src = $(it).find("img:first").attr("src");
       //console.log(src);
       let start = src.lastIndexOf("/") + 1;
-      const regex = /.jpg/i;
-      let item = src.substr(start).replace(regex, '');
+      let text = src.substr(start);
+      if (text.indexOf("_") === -1) {
+        return true;
+      }
+
+      let item = text.split("_")[0];
+
+      if (item.length !== 36) {
+        return true;
+      }
       
       let quantity = $(it)
                     .find("div.snipcart-item-quantity__quantity")
                     .find("span:first").text();
+
+      if (isNaN(quantity)) {
+        return true;
+      }
 
       items.push({
         i: item,
